@@ -6,7 +6,7 @@ O que já adicionei:
   .Código JavaScript para completar campos do endereço assim que digita o CEP no formulário de registro.
 
 Abaixo uma lista do que ainda pretendo adicionar:
- .Página de pagamento.
+ .Página de pagamento.  
  .Gerador do valor do frete automático.
  .Integração com melhor envio.
  .Criar nova página de cadastro de produto apenas para Admin autenticado com possibilidade de múltiplas variações em cada produto.

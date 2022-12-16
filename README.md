@@ -3,13 +3,13 @@ Este conteúdo foi criado no Curso de Python 3 - Do Básico Ao Avançado (Comple
 TODOs:
 
 O que já adicionei:
-  Código JavaScript para completar campos do endereço assim que digita o CEP no formulário de registro.
+  .Código JavaScript para completar campos do endereço assim que digita o CEP no formulário de registro.
 
 Abaixo uma lista do que ainda pretendo adicionar:
- Página de pagamento.
- Gerador do valor do frete automático.
- Integração com melhor envio.
- Criar nova página de cadastro de produto apenas para Admin autenticado com possibilidade de múltiplas variações em cada produto.
- Upload de múltiplas imagens.
- Aplicação de JS para carrossel das imagens dos produtos.
- Aplicação de JS para alteração de quantidade de produto direto no carrinho.
+ .Página de pagamento.
+ .Gerador do valor do frete automático.
+ .Integração com melhor envio.
+ .Criar nova página de cadastro de produto apenas para Admin autenticado com possibilidade de múltiplas variações em cada produto.
+ .Upload de múltiplas imagens.
+ .Aplicação de JS para carrossel das imagens dos produtos.
+ .Aplicação de JS para alteração de quantidade de produto direto no carrinho.

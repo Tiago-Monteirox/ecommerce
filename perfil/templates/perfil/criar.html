@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+
+
+{% block conteudo %}
+
+<div class="row">
+
+    {% if not request.user.is_authenticated %}
+    <div class="col-lg mt-3">
+        <h4>Login</h4>
+        <p>Se você já fez cadastro, basta entrar com seu usuário e senha abaixo:</p>
+
+        <form method="POST" action="{% url 'perfil:login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="InputUsuario1">Usuário</label>
+                <input type="text" name="username" class="form-control" id="InputUsuario1"
+                    aria-describedby="usuarioHelp" placeholder="Digite seu usuário">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Senha:</label>
+                <input type="password" name="password" class="form-control" id="exampleInputPassword1"
+                    placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block btn-lg">Entrar</button>
+        </form>
+
+    </div>
+    {% endif %}
+
+    <div class="col-lg mt-3">
+
+        {% block titulocadastro %}
+        <h4>Cadastro</h4>
+        <p>Caso ainda não tenha cadastro, utilize o formulário abaixo a seguir para se cadastrar</p>
+        {% endblock %}
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{ userform|crispy }}
+            {{ perfilform|crispy }}
+
+            <div class="row">
+                <div class="col">
+                    <button type='submit' class='btn btn-primary btn-block btn-lg'>
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+
+    
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function() {
+
+        function limpa_formulário_cep() {
+            // Limpa valores do formulário de cep.
+            $("#id_endereco").val("");
+            $("#id_bairro").val("");
+            $("#id_cidade").val("");
+            $("id_estado").val("");
+        }
+        
+        //Quando o campo cep perde o foco.
+        $("#id_cep").blur(function() {
+            //Nova variável "cep" somente com dígitos.
+            var cep = $(this).val().replace(/\D/g, '');
+
+            //Verifica se campo cep possui valor informado.
+            if (cep != "") {
+
+                //Expressão regular para validar o CEP.
+                var validacep = /^[0-9]{8}$/;
+
+                //Valida o formato do CEP.
+                if(validacep.test(cep)) {
+
+                    //Preenche os campos com "..." enquanto consulta webservice.
+                    $("#id_endereco").val("...");
+                    $("#id_bairro").val("...");
+                    $("#id_cidade").val("...");
+                    $("#id_estado").val("...");
+
+                    //Consulta o webservice viacep.com.br/
+                    $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+
+                        if (!("erro" in dados)) {
+                        
+                            //Atualiza os campos com os valores da consulta.
+                            $("#id_endereco").val(dados.logradouro);
+                            $("#id_bairro").val(dados.bairro);
+                            $("#id_cidade").val(dados.localidade);
+                            $("#id_estado").val(dados.uf);
+                        } //end if.
+                        else {
+                            //CEP pesquisado não foi encontrado.
+                            limpa_formulário_cep();
+                            alert("CEP não encontrado.");
+                        }
+                    });
+                } //end if.
+                else {
+                    //cep é inválido.
+                    limpa_formulário_cep();
+                    alert("Formato de CEP inválido.");
+                }
+            } //end if.
+            else {
+                //cep sem valor, limpa formulário.
+                limpa_formulário_cep();
+            }
+        });
+    });
+
+</script>
+{% endblock js %}

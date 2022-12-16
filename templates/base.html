@@ -1,0 +1,28 @@
+{% load static %}
+
+
+
+<!doctype html>
+<html lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+<head>
+    {% include 'parciais/_head.html' %}
+    <title>{% block titulo %}{% endblock %}E-commerce do Titi</title>
+</head>
+
+<body>
+    {% include 'parciais/_nav.html' %}
+    <main class="container mt-4 mb-4">
+        {% include 'parciais/_messages.html' %}
+        {% block conteudo %}{% endblock %}
+    </main>
+
+    {% include 'parciais/_footer.html' %}
+    {% block js %}
+    {% endblock js %}
+
+</body>
+
+</html>

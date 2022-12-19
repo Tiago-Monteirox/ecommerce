@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.utils import timezone
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView
 from django.views import View
 from produto.models import Produto
 from django.http import HttpResponse
@@ -36,6 +37,14 @@ class Busca(ListaProdutos):
         self.request.session.save()
 
         return qs
+
+class CriarProduto(CreateView):
+    model = Produto
+    fields = '__all__'
+    template_name = 'produto/criar.html'
+
+    def get_success_url(self):
+        return reverse('produto:lista')
 
 class DetalheProduto(DetailView):
     model = Produto

@@ -9,6 +9,9 @@ from . import models
 from perfil.models import Perfil
 from django.contrib import messages
 from django.db.models import Q
+from django.views.generic.edit import CreateView
+# from django.views.generic.edit import FormView
+# from .forms import FileFieldForm
 
 class ListaProdutos(ListView):
     model = Produto
@@ -36,6 +39,33 @@ class Busca(ListaProdutos):
         self.request.session.save()
 
         return qs
+
+
+class CriarProduto(CreateView):
+    model = Produto
+    fields = '__all__'
+    template_name = 'produto/criar.html'
+
+    def get_success_url(self):
+        return reverse('produto:lista')
+
+
+# class FileFieldFormView(FormView):
+#     form_class = FileFieldForm
+#     template_name = 'produto/criar.html'  # Replace with your template.
+#     success_url = '127.0.0.1:8000/criar/'  # Replace with your URL or reverse().
+
+#     def post(self, request, *args, **kwargs):
+#         form_class = self.get_form_class()
+#         form = self.get_form(form_class)
+#         files = request.FILES.getlist('file_field')
+#         if form.is_valid():
+#             for f in files:
+#                 ...  # Do something with each file.
+#             return self.form_valid(form)
+#         else:
+#             return self.form_invalid(form)
+
 
 class DetalheProduto(DetailView):
     model = Produto

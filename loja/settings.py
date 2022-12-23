@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'pedido',
     'perfil',
     'user',
+    'categoria',
 
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

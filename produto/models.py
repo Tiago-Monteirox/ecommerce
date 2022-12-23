@@ -4,10 +4,11 @@ import os
 from django.conf import settings
 from django.utils.text import slugify
 from utils import utils
-
+from categoria.models import Categoria
 
 class Produto(models.Model):
     nome = models.CharField(max_length=100)
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     descricao_curta = models.TextField(max_length=100)
     descricao_longa = models.TextField()
     imagem = models.ImageField(
@@ -56,6 +57,9 @@ class Produto(models.Model):
             quality=50,
         )
    
+        class Meta:
+            verbose_name = 'produto'
+            verbose_name_plural = 'produtos'
 
     def save(self, *args, **kwargs):
         if not self.slug:

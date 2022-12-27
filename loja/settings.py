@@ -48,8 +48,10 @@ INSTALLED_APPS = [
     'perfil',
     'user',
     'categoria',
+    'django.contrib.sites',
 
 ]
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [

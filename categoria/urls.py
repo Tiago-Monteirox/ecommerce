@@ -5,7 +5,8 @@ app_name = "categoria"
 
 urlpatterns = [
     path('criar/', views.CriarCategoria.as_view(), name="criar"),
-    path('criarsubcategoria/', views.CriarSubCategoria.as_view(), name="criar_subcategoria"),
+    path('lista/', views.ListaCategoria.as_view(), name="lista"),
+    # path('criarsubcategoria/', views.CriarSubCategoria.as_view(), name="criar_subcategoria"),
 ]
 
 
